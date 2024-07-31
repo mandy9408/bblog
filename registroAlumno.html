@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registro de Alumno</title>
+</head>
+<body>
+    <h2>Registro de Alumno</h2>
+    <form id="formRegistroAlumno">
+        <label for="nombreApellidos">Nombre y Apellidos:</label><br>
+        <input type="text" id="nombreApellidos" name="nombreApellidos" required><br><br>
+
+        <label for="edad">Edad (meses):</label><br>
+        <input type="number" id="edad" name="edad" required><br><br>
+
+        <label for="registro_alimentacion">Registro de Alimentación (separado por comas):</label><br>
+        <input type="text" id="registro_alimentacion" name="registro_alimentacion" required><br><br>
+
+        <label for="cambioPanales">Cambio de Pañales:</label><br>
+        <input type="number" id="cambioPanales" name="cambioPanales" required><br><br>
+
+        <label for="siestas">Siestas:</label><br>
+        <input type="number" id="siestas" name="siestas" required><br><br>
+
+        <label for="actividades">Actividades (separado por comas):</label><br>
+        <input type="text" id="actividades" name="actividades" required><br><br>
+
+        <label for="idProfe">ID del Profe:</label><br>
+        <input type="number" id="idProfe" name="idProfe" required><br><br>
+
+        <label for="idPadre">ID del Padre:</label><br>
+        <input type="number" id="idPadre" name="idPadre" required><br><br>
+
+        <label for="idGrupo">ID del Grupo:</label><br>
+        <input type="number" id="idGrupo" name="idGrupo" required><br><br>
+
+        <input type="submit" value="Registrar">
+    </form>
+
+    <script>
+        document.getElementById('formRegistroAlumno').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const nombreApellidos = document.getElementById('nombreApellidos').value;
+            const edad = document.getElementById('edad').value;
+            const registro_alimentacion = document.getElementById('registro_alimentacion').value.split(',');
+            const cambioPanales = document.getElementById('cambioPanales').value;
+            const siestas = document.getElementById('siestas').value;
+            const actividades = document.getElementById('actividades').value.split(',');
+            const idProfe = document.getElementById('idProfe').value;
+            const idPadre = document.getElementById('idPadre').value;
+            const idGrupo = document.getElementById('idGrupo').value;
+
+            const data = {
+                nombreApellidos,
+                edad: parseInt(edad),
+                registro_alimentacion,
+                cambioPanales: parseInt(cambioPanales),
+                siestas: parseInt(siestas),
+                actividades,
+                idProfe: parseInt(idProfe),
+                idPadre: parseInt(idPadre),
+                idGrupo: parseInt(idGrupo)
+            };
+
+            fetch('https://tu-api-url.com/registro_alumno', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert('Registro exitoso');
+                console.log('Success:', data);
+            })
+            .catch((error) => {
+                alert('Error en el registro');
+                console.error('Error:', error);
+            });
+        });
+    </script>
+</body>
+</html>

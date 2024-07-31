@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registro de Padre</title>
+</head>
+<body>
+    <h2>Registro de Padre</h2>
+    <form id="formRegistroPadre">
+        <label for="nombreApellidos">Nombre y Apellidos:</label><br>
+        <input type="text" id="nombreApellidos" name="nombreApellidos" required><br><br>
+
+        <label for="telefono">Teléfono:</label><br>
+        <input type="text" id="telefono" name="telefono" required><br><br>
+
+        <label for="password">Contraseña:</label><br>
+        <input type="password" id="password" name="password" required><br><br>
+
+        <input type="submit" value="Registrar">
+    </form>
+
+    <script>
+        document.getElementById('formRegistroPadre').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const nombreApellidos = document.getElementById('nombreApellidos').value;
+            const telefono = document.getElementById('telefono').value;
+            const password = document.getElementById('password').value;
+
+            const data = {
+                nombreApellidos,
+                telefono,
+                password
+            };
+
+            fetch('https://tu-api-url.com/registro_padre', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert('Registro exitoso');
+                console.log('Success:', data);
+            })
+            .catch((error) => {
+                alert('Error en el registro');
+                console.error('Error:', error);
+            });
+        });
+    </script>
+</body>
+</html>
