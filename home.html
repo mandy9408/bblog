@@ -1,250 +1,170 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Guardería - Página Principal</title>
+
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-image: url(img/homeImage.jpg); /* URL de la imagen de fondo */
-            background-size: cover;
-            background-position: center;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            position: relative;
-        }
-        .overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5); /* Oscurece la imagen de fondo */
-            z-index: 1;
-        }
-        .top-right {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            z-index: 3;
-        }
-        .top-right button {
-            padding: 10px 20px;
-            margin: 5px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 14px;
-        }
-        .login-btn {
-            background-color: #4CAF50;
-            color: white;
-        }
-        .login-btn:hover {
-            background-color: #45a049;
-        }
-        .register-btn {
-            background-color: #008CBA;
-            color: white;
-        }
-        .register-btn:hover {
-            background-color: #007bb5;
-        }
-        .container {
-            position: relative;
-            z-index: 2;
-            background-color: rgba(255, 255, 255, 0.8);
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-            text-align: center;
-        }
-        .tabs {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 20px;
-        }
-        .tabs button {
-            padding: 10px 20px;
-            margin: 0 5px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 14px;
-            background-color: #f2f2f2;
-        }
-        .tabs button.active {
-            background-color: #4CAF50;
-            color: white;
-        }
-        .form-container {
-            display: none;
-            width: 300px;
-        }
-        .form-container.active {
-            display: block;
-        }
-        .form-container h2 {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .form-container label {
-            display: block;
-            margin-bottom: 8px;
-        }
-        .form-container input[type="text"], 
-        .form-container input[type="password"], 
-        .form-container input[type="number"] {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        .form-container input[type="submit"] {
-            width: 100%;
-            padding: 10px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        .form-container input[type="submit"]:hover {
-            background-color: #45a049;
-        }
+      body {
+        font-family: Arial, sans-serif;
+        background-image: url("img/homeImage.jpg"); /* URL de la imagen de fondo */
+        background-size: cover;
+        background-position: center;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        position: relative;
+      }
+      .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5); /* Oscurece la imagen de fondo */
+        z-index: 1;
+      }
+      .top-right {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        z-index: 3;
+      }
+      .top-right button {
+        padding: 10px 20px;
+        margin: 5px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+      }
+      .loginRegister-btn {
+        background-color: #4caf50;
+        color: white;
+      }
+      .loginRegister-btn:hover {
+        background-color: #45a049;
+      }
+      .container {
+        position: relative;
+        z-index: 2;
+        background-color: rgba(255, 255, 255, 0.8);
+        padding: 40px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transition: all 0.5s ease;
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      .container.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .hidden {
+        display: none;
+      }
+      .tabs {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+      }
+      .tabs button {
+        padding: 10px 20px;
+        margin: 0 5px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+        background-color: #f2f2f2;
+      }
+      .tabs button.active {
+        background-color: #4caf50;
+        color: white;
+      }
+      .form-container {
+        display: none;
+        width: 300px;
+      }
+      .form-container.active {
+        display: block;
+      }
+      .form-container h2 {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+      .form-container label {
+        display: block;
+        margin-bottom: 8px;
+      }
+      .form-container input[type="text"],
+      .form-container input[type="password"],
+      .form-container input[type="number"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+      .form-container input[type="submit"] {
+        width: 100%;
+        padding: 10px;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      .form-container input[type="submit"]:hover {
+        background-color: #45a049;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="overlay"></div>
     <div class="top-right">
-        <button class="login-btn" onclick="scrollToSection('login')">Login</button>
-        <button class="register-btn" onclick="scrollToSection('register')">Registro</button>
+      <button class="loginRegister-btn" onclick="showForm()">Login/Register</button>
     </div>
-    <div class="container">
-        <h1>Bienvenido a la Guardería</h1>
-        <div class="tabs">
-            <button class="tab-link active" onclick="openTab('login')">Login</button>
-            <button class="tab-link" onclick="openTab('register')">Registro</button>
-        </div>
-        <div id="login" class="form-container active">
-            <h2>Inicio de Sesión</h2>
-            <form id="loginForm">
-                <label for="username">Usuario:</label>
-                <input type="text" id="username" name="username" required>
-
-                <label for="password">Contraseña:</label>
-                <input type="password" id="password" name="password" required>
-
-                <input type="submit" value="Iniciar Sesión">
-            </form>
-        </div>
-        <div id="register" class="form-container">
-            <h2>Registro de Padre</h2>
-            <form id="formRegistroPadre">
-                <label for="nombreApellidos">Nombre y Apellidos:</label>
-                <input type="text" id="nombreApellidos" name="nombreApellidos" required>
-
-                <label for="telefono">Teléfono:</label>
-                <input type="text" id="telefono" name="telefono" required>
-
-                <label for="password">Contraseña:</label>
-                <input type="password" id="password" name="password" required>
-
-                <label for=""
-
-                <input type="submit" value="Registrar">
-            </form>
-        </div>
+    <div class="container hidden">
+      <h1>Bienvenido a la Guardería</h1>
+      <div class="tabs">
+        <button class="tab-link active" onclick="openTab('login')">Login</button>
+        <button class="tab-link" onclick="openTab('register')">Registro</button>
+      </div>
+      <div id="login" class="form-container active">
+        <h2>Inicio de Sesión</h2>
+        <form id="loginForm">
+          <label for="username">Nombre de usuario:</label>
+          <input type="text" id="username" name="username" required />
+          <label for="password">Contraseña:</label>
+          <input type="password" id="password" name="password" required />
+          <input type="submit" value="Iniciar Sesión" />
+        </form>
+      </div>
+      <div id="register" class="form-container">
+        <h2>Registro de usuario</h2>
+        <form id="formRegistroPadre">
+          <label for="nombreUsuario">Nombre de usuario</label>
+          <input type="text" id="nombreUsuario" name="nombreUsuario" required/>
+          <label for="nombreApellidos">Nombre y Apellidos:</label>
+          <input type="text" id="nombreApellidos" name="nombreApellidos" required/>
+          <label for="telefono">Teléfono:</label>
+          <input type="text" id="telefono" name="telefono" required />
+          <label for="password">Contraseña:</label>
+          <input type="password" id="password" name="password" required />
+          <label for="verificarPassword">Verificar Contraseña:</label>
+          <input type="verificarPassword" id="verificarPassword" name="verificarPassword" required />
+          <input type="submit" value="Registrar" />
+        </form>
+      </div>
     </div>
-
-    <script>
-        function openTab(tabId) {
-            const tabs = document.querySelectorAll('.form-container');
-            tabs.forEach(tab => {
-                tab.classList.remove('active');
-            });
-            document.getElementById(tabId).classList.add('active');
-
-            const tabLinks = document.querySelectorAll('.tab-link');
-            tabLinks.forEach(link => {
-                link.classList.remove('active');
-            });
-            document.querySelector(`.tab-link[onclick="openTab('${tabId}')"]`).classList.add('active');
-        }
-
-        function scrollToSection(sectionId) {
-            openTab(sectionId);
-            document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
-        }
-
-        document.getElementById('loginForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-
-            const data = {
-                username,
-                password
-            };
-
-            fetch('https://tu-api-url.com/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    alert('Inicio de sesión exitoso');
-                    window.location.href = 'dashboard.html'; // Redirigir a la página principal o dashboard
-                } else {
-                    alert('Error en el inicio de sesión: ' + data.message);
-                }
-            })
-            .catch((error) => {
-                alert('Error en el inicio de sesión');
-                console.error('Error:', error);
-            });
-        });
-
-        document.getElementById('formRegistroPadre').addEventListener('submit', function(event) {
-            event.preventDefault();
-
-            const nombreApellidos = document.getElementById('nombreApellidos').value;
-            const telefono = document.getElementById('telefono').value;
-            const password = document.getElementById('password').value;
-
-            const data = {
-                nombreApellidos,
-                telefono,
-                password
-            };
-
-            fetch('https://tu-api-url.com/registro_padre', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            })
-            .then(response => response.json())
-            .then(data => {
-                alert('Registro exitoso');
-                console.log('Success:', data);
-            })
-            .catch((error) => {
-                alert('Error en el registro');
-                console.error('Error:', error);
-            });
-        });
-    </script>
-</body>
+    <script src="login.js"></script>
+  </body>
 </html>
